@@ -8,7 +8,7 @@
 <van-cell-group>
   <van-field v-model="user.code" label="验证码"  required placeholder="请输入验证码" />
 </van-cell-group>
-<van-button type="info" @click.prevent="handleLogin" block>信息按钮</van-button>
+<van-button type="info" @click.prevent="handleLogin" block :loading="loadingnow">信息按钮</van-button>
   </div>
 </template>
 
@@ -26,7 +26,8 @@ export default {
       user: {
         mobile: '18801185985',
         code: '246810'
-      }
+      },
+      loadingnow: false
     }
   },
   methods: {
@@ -35,11 +36,13 @@ export default {
       // const res = await Login(this.user)
       // console.log(res)
       try {
+        this.loadingnow = true
         const res = await Login(this.user)
         console.log(res)
         // 获取token,调用setItem方法
         this.$store.commit('setUser', res)
         // 如果成功，那么，我们就登录到home页面
+        this.loadingnow = false
         this.$router.push('/')
       } catch (error) {
         console.log(error)
@@ -52,13 +55,13 @@ export default {
 <style lang="less" scoped>
 .van-nav-bar{
     background-color: #1989FA;
-    height: 120px;
+    height: 200px;
 }
 .van-nav-bar__title{
     color:aliceblue;
 }
 
 .van-button {
-        height: 160px;
+        height: 200px;
 }
 </style>
