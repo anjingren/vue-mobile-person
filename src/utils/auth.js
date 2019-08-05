@@ -1,18 +1,16 @@
 // 获取token，设置token，移除token
 // 设置token
-export const setItem = (res) => {
+const TOKEN = 'user'
+export const setUser = (data) => {
   // 设置
-  window.localStorage.setItem('TOKEN', JSON.stringify(res))
-//   return JSON.stringify(user).token
+  window.localStorage.setItem(TOKEN, JSON.stringify(data))
 }
 
 // 获取token
-export const getItem = () => {
-//   const user = window.localStorage.getItem('TOKEN')
-//   JSON.parse(user)
-  JSON.parse(window.localStorage.getItem('TOKEN'))
+export const getUser = () => {
+  JSON.parse(window.localStorage.getItem(TOKEN))
 }
 // 移除token
-export const removeItem = () => {
-  window.localStorage.removeItem('TOKEN')
+export const removeUser = () => {
+  window.localStorage.removeItem(TOKEN)
 }

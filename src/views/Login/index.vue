@@ -16,8 +16,9 @@
 // 引入axios
 // import axios from 'axios'
 import { Login } from '@/api/user.js'
-// import { setItem } from '@/utils/auth.js'
-// import { setUser } from '@/store/index.js'
+// import { setUser, getUser } from '@/utils/auth.js'
+// import { setUser } from '@/store/indeeex.js'
+import { mapMutations } from 'vuex'
 
 export default {
   name: 'LoginHandel',
@@ -30,6 +31,8 @@ export default {
       loadingnow: false
     }
   },
+  computed: {
+  },
   methods: {
     async handleLogin () {
       // const res = await this.axios.post('app/v1_0/authorizations', this.user)
@@ -37,17 +40,19 @@ export default {
       // console.log(res)
       try {
         this.loadingnow = true
-        const res = await Login(this.user)
-        console.log(res)
+        const { data: { data } } = await Login(this.user)
+        // console.log(this.user)
         // 获取token,调用setItem方法
-        this.$store.commit('setUser', res)
+        this.setUser(data)
         // 如果成功，那么，我们就登录到home页面
         this.loadingnow = false
         this.$router.push('/')
       } catch (error) {
-        console.log(error)
+        // console.log(error)
       }
-    }
+    },
+    // mapMutations调用时在method中，而不是在computed中调用
+    ...mapMutations(['setUser'])
   }
 }
 </script>

@@ -7,22 +7,41 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {
+  // routes: [{
+  //   path: '/login',
+  //   name: 'login',
+  //   component: () => {
+  //   import('@/views/Login')
+  //   }
+  // },
+  // { path: '/',
+  //   component: () =>
+  //         import('@/views/tabbar/index.vue'),
+  //   children: [{
+  //     path: '/',
+  //     name: 'home',
+  //     component: () =>
+  //             import('@/views/Home')
+  //   }]
+  // }
+  // ]
+
+  routes: [{
+    path: '/',
+    component: () =>
+        import('@/views/tabbar/index.vue'),
+    children: [{
       path: '/',
+      name: 'home',
       component: () =>
-          import('@/views/tabbar/index.vue'),
-      children: [{
-        path: '/',
-        name: 'home',
-        component: () =>
-              import('@/views/Home')
-      }]
-    },
-    { name: 'login',
-      path: '/login',
-      component: () => {
-      import('@/views/Login')
-      } }
-  ]
+            import('@/views/Home')
+    }]
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () =>
+        import('@/views/Login')
+  }]
+
 })

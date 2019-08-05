@@ -5,11 +5,12 @@ import router from './router'
 import vant from 'vant'
 import 'vant/lib/index.css'
 // 导入Store
-import store from './store/index.js'
+import store from '@/store/index.js'
 // 登录验证
 import VeeValidate, { Validator } from 'vee-validate'
 // 导入语言
 import zhCN from 'vee-validate/dist/locale/zh_CN'
+// import { reject } from 'q'
 // 注册
 Vue.use(VeeValidate)
 Vue.use(vant)
@@ -20,11 +21,16 @@ Validator.extend('phone', {
   validate: value =>
     value.length === 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/.test(value)
 })
-// Validator.extend('code', {
-//   getMessage: field => '请输入正确的验证码',
-//   validate: value =>
-//     value.length === 4 && /^\d{4})$/.test(value)
-// })
+// 设置睡眠延迟加载
+Vue.prototype.$sleep = (time) => {
+  // 用一个Promise来处理异步操作
+  return new Promise((resolve, reject) => {
+    // 设置定时器
+    window.setTimeout(() => {
+      resolve()
+    }, time)
+  })
+}
 
 Vue.config.productionTip = false
 

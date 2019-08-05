@@ -5,11 +5,11 @@ import * as auth from '@/utils/auth.js'
 // 注册使用
 Vue.use(Vuex)
 // 配置Vuex
-const store = new Vuex.Store({
+export default new Vuex.Store({
   // state声明数据
   state: {
     // 初始化，在本地获取token，所以就调用getItem
-    user: auth.getItem()
+    user: auth.getUser()
   },
 
   actions: {},
@@ -19,10 +19,7 @@ const store = new Vuex.Store({
       // 接收改变的数据，更新state
       state.user = data
       // 把state中获取到的token设置到本地
-      auth.setItem(state.user)
+      auth.setUser(data)
     }
   }
-
 })
-
-export default store
